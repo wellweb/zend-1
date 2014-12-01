@@ -1,0 +1,43 @@
+
+
+<a class="btn btn-success" href="<?php echo $this->url('imovel', array('controller' => 'imovel', 'action' => 'inserir')); ?>"> Cadastrar</a>
+<br>
+
+<?php
+if($this->success)
+    echo '<div class="alert alert-success"> '. $this->success[0] .' <button type="button" class="close" data-dismiss="alert"> x </button> </div>';
+if($this->error)
+    echo '<div class="alert alert-warning">'. $this->error[0] .' <button type="button" class="close" data-dismiss="alert"> x </button> </div>';
+
+?>
+<table class="table table-striped table-hover">
+    <caption> Todos os usuarios </caption>
+    <thead>
+        <tr>
+            <th>ID </th>
+            <th>Nome </th>
+            <th>Ação </th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    /**
+     * @var $entity imovel\Entity\Usuario
+     */
+    ?>
+    <?php if ($this->data): ?>
+        <?php foreach($this->data as $entity){ ?>
+        <tr>
+            <td> <?php echo $entity->getIdUsuario(); ?> </td>
+            <td> <?php echo $entity->getNome(); ?> </td>
+            <td>
+                <a class="btn btn-success" href="<?php echo $this->url('imovel', array('controller' => 'imovel', 'action' => 'editar', 'id' => $entity->getIdUsuario() )); ?>"> <i class="glyphicon glyphicon-floppy-open"> </i> </a>
+                <a class="btn btn-danger" href="<?php echo $this->url('imovel', array('controller' => 'imovel', 'action' => 'excluir', 'id' => $entity->getIdUsuario() )); ?>"> <i class="glyphicon glyphicon-trash"> </i> </a>
+            </td>
+        </tr>
+        <?php } ?>
+    <?php else: ?>
+        <p> Nenhum registro encontrado! </p>
+    <?php endif; ?>
+    </tbody>
+</table>
