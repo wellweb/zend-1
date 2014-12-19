@@ -7,56 +7,8 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace imovel;
+namespace Imovel;
 return array(
-/*
-	'router' => array(
-        'routes' => array(
-            'imovel' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/imovel',
-                    'defaults' => array(
-                        'controller' => 'imovel\Controller\index',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/imovel',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'imovel\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/imovel[/:action][/:id]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                               // 'controller' => 'index',
-                               // 'action' => 'inserir'
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-*/
 
 
     'router' => array(
@@ -70,11 +22,44 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'imovel\Controller\index',
+                        'controller' => 'Imovel\Controller\index',
                         'action'     => 'index',
                     ),
                 ),
+
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/imovel[/:action][/:id]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '/d+',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                    'paginator' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[page/:page]',
+                            'constraints' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'page' => '[0-9]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'index',
+                                'page' => 1,
+                            ),
+                        ),
+                    ),
+                ),
+
             ),
+
+
         ),
     ),
 
@@ -83,8 +68,7 @@ return array(
 
     'controllers' => array(
         'invokables' => array(
-            'imovel\Controller\Index' => 'imovel\Controller\IndexController',
-            'imovel\Controller\Login' => 'imovel\Controller\LoginController'
+            'Pessoa\Controller\Index' => 'Imovel\Controller\IndexController'
         ),
     ),
     'view_manager' => array(
